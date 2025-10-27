@@ -5,7 +5,7 @@
   },
   "projects": {
     "D:\\Repos\\tristan-nuget-101\\NuGetSample\\MyCalculator\\MyCalculator.csproj": {
-      "version": "1.0.2",
+      "version": "1.0.6",
       "restore": {
         "projectUniqueName": "D:\\Repos\\tristan-nuget-101\\NuGetSample\\MyCalculator\\MyCalculator.csproj",
         "projectName": "MyCalculatorTristan",
