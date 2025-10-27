@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "dTSk9K6sOKw=",
+  "dgSpecHash": "g1RGSvCoLA0=",
   "success": true,
   "projectFilePath": "D:\\Repos\\tristan-nuget-101\\NuGetSample\\MyCalculator\\MyCalculator.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\tristan.keick\\.nuget\\packages\\microsoft.build.tasks.git\\8.0.0\\microsoft.build.tasks.git.8.0.0.nupkg.sha512",
+    "C:\\Users\\tristan.keick\\.nuget\\packages\\microsoft.sourcelink.common\\8.0.0\\microsoft.sourcelink.common.8.0.0.nupkg.sha512",
+    "C:\\Users\\tristan.keick\\.nuget\\packages\\microsoft.sourcelink.github\\8.0.0\\microsoft.sourcelink.github.8.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
