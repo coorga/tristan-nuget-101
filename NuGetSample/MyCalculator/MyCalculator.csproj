@@ -4,19 +4,21 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.0.1</Version>
-        <Authors>Tristan Keick</Authors>
+
+        <Version>1.0.2</Version>
         <PackageId>MyCalculatorTristan</PackageId>
-        <Description>Simple Caluculator for tests</Description>
+        <Authors>Tristan Keick</Authors>
+        <Description>Simple Calculator for tests</Description>
         <RepositoryUrl>https://github.com/coorga/tristan-nuget-101.git</RepositoryUrl>
-        <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <IncludeSymbols>false</IncludeSymbols>
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+        <Deterministic>true</Deterministic>
+        <DebugType>embedded</DebugType>
+        <DebugSymbols>true</DebugSymbols>
     </PropertyGroup>
 
     <ItemGroup>
