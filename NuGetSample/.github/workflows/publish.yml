@@ -1,0 +1,34 @@
+﻿﻿name: Publish to GitHub Packages
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore
+        run: dotnet restore NuGetSample/NuGetSample.sln
+
+      - name: Build
+        run: dotnet build NuGetSample/NuGetSample.sln --configuration Release
+
+      - name: Pack
+        run: dotnet pack NuGetSample/NuGetSample.sln --configuration Release -o ./nupkgs
+
+      - name: Add GitHub Packages source
+        run: dotnet nuget add source --username ${{ github.actor }} --password ${{ secrets.ACCESS_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+
+      - name: Publish to GitHub Packages
+        run: dotnet nuget push "./nupkgs/*.nupkg" --source "github" --api-key ${{ secrets.ACCESS_TOKEN }}
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
