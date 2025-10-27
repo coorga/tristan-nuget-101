@@ -1,4 +1,4 @@
-﻿name: Publish to GitHub Packages
+name: Publish to GitHub Packages
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
         run: dotnet build NuGetSample/NuGetSample.sln --configuration Release
 
       - name: Pack
-        run: dotnet pack NuGetSample/NuGetSample.sln --configuration Release --no-build -o ./nupkgs 
+        run: dotnet pack NuGetSample/NuGetSample.sln --configuration Release --no-build -o ./nupkgs
       
       - name: Upload NuGet artifacts
         uses: actions/upload-artifact@v4
@@ -36,16 +36,6 @@ jobs:
         run: dotnet nuget add source --username ${{ github.actor }} --password ${{ secrets.ACCESS_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
         
       - name: Publish to GitHub Packages
-        run: dotnet nuget push "./nupkgs/*.nupkg" --source "github" --api-key ${{ secrets.ACCESS_TOKEN }} --exclude-symbols
+        run: dotnet nuget push "./nupkgs/*.nupkg" --source "github" --api-key ${{ secrets.ACCESS_TOKEN }}
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-
-      - name: 📦 Upload NuGet artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: MyCalculator-${{ github.ref_name }}
-          path: |
-            ./nupkgs/**/*.nupkg
-            ./nupkgs/**/*.snupkg
-          if-no-files-found: error
-          retention-days: 30
