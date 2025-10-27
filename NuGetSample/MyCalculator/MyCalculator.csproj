@@ -4,34 +4,23 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-
-        <!-- NuGet-Metadaten -->
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Version>1.0.0</Version>
+        <Authors>Tristan Keick</Authors>
         <PackageId>MyCalculator</PackageId>
-        <Authors>Tristan_Keick</Authors>
-        <Description>Einfache Beispielbibliothek mit Additionsmethode</Description>
-        <RepositoryUrl>https://github.com/coorga/tristan-nuget-101</RepositoryUrl>
+        <Description>Simple Caluculator for tests</Description>
+        <RepositoryUrl>https://github.com/coorga/tristan-nuget-101.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-
-        <!-- SourceLink & Debug Infos -->
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-        <DebugType>portable</DebugType>
-
-        <!-- Symbole/Snupkg -->
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
-    </ItemGroup>
-
-    <!-- README mit ins Paket -->
-    <ItemGroup>
-        <None Include="README.md" Pack="true" PackagePath="/" />
     </ItemGroup>
 
 </Project>
