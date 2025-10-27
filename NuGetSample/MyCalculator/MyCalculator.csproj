@@ -7,7 +7,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Version>1.0.0</Version>
         <Authors>Tristan Keick</Authors>
-        <PackageId>MyCalculator</PackageId>
+        <PackageId>MyCalculatorTristan</PackageId>
         <Description>Simple Caluculator for tests</Description>
         <RepositoryUrl>https://github.com/coorga/tristan-nuget-101.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
