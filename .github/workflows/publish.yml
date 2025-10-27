@@ -1,9 +1,13 @@
-﻿name: Publish to GitHub Packages
+name: Publish to GitHub Packages
 
 on:
   push:
     tags:
       - 'v*.*.*'
+
+permissions:
+  contents: read
+  packages: write
 
 jobs:
   publish:
@@ -16,21 +20,40 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
+      # Version & Artefaktordner setzen
+      - name: Set env vars
+        run: |
+          echo "version=${GITHUB_REF_NAME#v}" >> $GITHUB_ENV
+          echo "artifactsFolder=${{ github.workspace }}/nupkgs" >> $GITHUB_ENV
+
       - name: Restore
         run: dotnet restore NuGetSample/NuGetSample.sln
 
       - name: Build
-        run: dotnet build NuGetSample/NuGetSample.sln --configuration Release
+        run: dotnet build NuGetSample/NuGetSample.sln --configuration Release --no-restore
 
       - name: Pack
-        run: dotnet pack NuGetSample/NuGetSample.sln --configuration Release -o ./nupkgs
-        
-      - name: Add GitHub Packages source
-        run: dotnet nuget add source --username ${{ github.actor }} --password ${{ secrets.ACCESS_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
-        
-      - name: Publish to GitHub Packages
-        run: dotnet nuget push "./nupkgs/*.nupkg" --source "github" --api-key ${{ secrets.ACCESS_TOKEN }} --skip-duplicate
+        run: |
+          dotnet pack NuGetSample/NuGetSample.sln \
+            --configuration Release \
+            -o "$artifactsFolder" \
+            -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg \
+            -p:PackageVersion="${version}"
         env:
+          artifactsFolder: ${{ env.artifactsFolder }}
+          version: ${{ env.version }}
+
+      - name: Add GitHub Packages source
+        run: dotnet nuget add source \
+               --username "${{ github.actor }}" \
+               --password "${{ secrets.ACCESS_TOKEN }}" \
+               --store-password-in-clear-text \
+               --name github "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+
+      - name: Publish to GitHub Packages
+        run: dotnet nuget push "$artifactsFolder/*.nupkg" --source "github" --api-key "${{ secrets.ACCESS_TOKEN }}" --skip-duplicate
+        env:
+          artifactsFolder: ${{ env.artifactsFolder }}
           NUGET_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
       - name: 📦 Upload NuGet artifacts
@@ -39,3 +62,4 @@ jobs:
           name: nuget-packages-${{ env.version }}
           path: ${{ env.artifactsFolder }}
           retention-days: 30
+          if-no-files-found: error
