@@ -46,12 +46,12 @@ jobs:
         run: >
           dotnet nuget push "./nupkgs/*.nupkg"
           --source "https://api.nuget.org/v3/index.json"
-          --api-key ${{ secrets.TEST_NUGET_ACCESS }}
+          --api-key ${{ secrets.NUGET_TEST_ACCESS }}
           --skip-duplicate
 
       - name: Publish .snupkg to nuget.org (symbol server)
         run: >
           dotnet nuget push "./nupkgs/*.snupkg"
           --source "https://api.nuget.org/v3/index.json"
-          --api-key ${{ secrets.TEST_NUGET_ACCESS }}
+          --api-key ${{ secrets.NUGET_TEST_ACCESS }}
           --skip-duplicate
