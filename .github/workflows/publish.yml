@@ -29,6 +29,14 @@ jobs:
       - name: Pack (.nupkg + .snupkg)
         run: dotnet pack NuGetSample/MyCalculator/MyCalculator.csproj --configuration Release --no-build -o ./nupkgs
 
+      # (optional) sanity listing — helps confirm DLL/PDB names/paths match
+      - name: Inspect package contents
+        run: |
+          echo "NUPKG:"
+          unzip -l ./nupkgs/*.nupkg | sed -n '1,200p'
+          echo "SNUPKG:"
+          unzip -l ./nupkgs/*.snupkg | sed -n '1,200p'
+
       - name: Upload NuGet artifacts
         uses: actions/upload-artifact@v4
         with:
