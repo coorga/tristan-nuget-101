@@ -5,10 +5,11 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
 
-        <Version>1.0.7</Version>
+        <Version>1.0.8</Version>
         <PackageId>MyCalculatorTristan</PackageId>
         <Authors>Tristan Keick</Authors>
         <Description>Simple Calculator for tests</Description>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/coorga/tristan-nuget-101.git</RepositoryUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
 
@@ -24,6 +25,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+        <None Include="README.md" Pack="true" PackagePath="" />
     </ItemGroup>
 
 </Project>
