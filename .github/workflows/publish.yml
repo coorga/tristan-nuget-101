@@ -43,4 +43,4 @@ jobs:
           NUGET_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
       - name: Publish .snupkg to nuget.org (symbol server)
-        run: dotnet nuget push "./nupkgs/*.snupkg" --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.TEST_NUGET_ACCESS }} --skip-duplicate
+        run: dotnet nuget push "./nupkgs/*.snupkg" --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_TEST_ACCESS }} --skip-duplicate
