@@ -25,9 +25,14 @@ jobs:
       - name: Build (Release + CI)
         run: dotnet build NuGetSample/NuGetSample.sln --configuration Release /p:ContinuousIntegrationBuild=true /p:Deterministic=true
 
-      # Pack ONLY the library project; .csproj must have IncludeSymbols=true & SymbolPackageFormat=snupkg
       - name: Pack (.nupkg + .snupkg)
-        run: dotnet pack NuGetSample/MyCalculator/MyCalculator.csproj --configuration Release --no-build -o ./nupkgs
+        run: >
+          dotnet pack NuGetSample/MyCalculator/MyCalculator.csproj
+          --configuration Release
+          -o ./nupkgs
+          /p:ContinuousIntegrationBuild=true
+          /p:Deterministic=true
+
 
       # (optional) sanity listing — helps confirm DLL/PDB names/paths match
       - name: Inspect package contents
